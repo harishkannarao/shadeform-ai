@@ -12,3 +12,20 @@ Store the shadeform ai API key in an environment variable `SHADEFORM_AI_API_KEY`
     curl -s --request GET \
         --url 'https://api.shadeform.ai/v1/instances/types?gpu_type=A6000&num_gpus=1&available=true&sort=price' \
         --header "X-API-KEY: $SHADEFORM_AI_API_KEY" | jq .
+
+### UFW firewall rules
+
+    sudo ufw status
+
+    sudo ufw default deny incoming
+
+    sudo ufw allow 22
+
+    sudo ufw allow OpenSSH
+
+    sudo ufw allow from your_ip_address to any port 22
+
+    sudo ufw enable
+
+    sudo ufw status
+    
