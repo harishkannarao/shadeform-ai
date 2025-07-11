@@ -3,9 +3,14 @@ Repository to capture commands and scripts to manage GPU instance and volumes wi
 
 ### API Key
 
-Store the shadeform ai API key in an environment variable `SHADEFORM_AI_API_KEY`
+Store the Shadeform AI API key in an environment variable `SHADEFORM_AI_API_KEY`
 
     export SHADEFORM_AI_API_KEY='<<KEY>>'
+
+### SSH Private Key
+
+Store the Shadeform AI SSH Private Key in file `scratch/shadeform_ai_private_key.pem`
+
 
 ### Find GPU instances by type and sort by price
 
