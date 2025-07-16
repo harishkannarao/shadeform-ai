@@ -72,9 +72,47 @@ Change the permission of the private key as `chmod 600 scratch/shadeform_ai_priv
 
     while sleep 1; do gpustat; done
 
-### Create Instance to run Jupyter Notebook
+### Run Jupyter Notebook
 
-### Create Instance to run model using vllm
+Create SSH Tunnel with port forwarding
+
+    ssh -i scratch/shadeform_ai_private_key.pem -L 8888:localhost:8888 shadeform@{instance_ip}
+
+Start jupyter notebook using docker
+
+    docker run -d --rm --name pytorch-notebook --network=host --ipc=host --runtime nvidia --gpus all quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8
+
+Get the notebook token from docker logs
+
+    docker logs --follow pytorch-notebook | grep 'token'
+
+Access the jupyter notebook in browser via localhost through the ssh tunnel. Use the `token` to login
+
+    http://127.0.0.1:8888
+
+Sample python script to test the notebook:
+
+```python
+import torch
+
+# Check if CUDA is available
+if torch.cuda.is_available():
+  print("CUDA is available. GPU Details:")
+  # Number of GPUs available
+  print(f"Number of GPUs: {torch.cuda.device_count()}")
+  for i in range(torch.cuda.device_count()):
+    # Get the name of the current GPU
+    print(f"GPU {i}: {torch.cuda.get_device_name(i)}")
+else:
+  print("CUDA is not available. Running on CPU.")
+```
+
+Stop the docket container running jupyter notebook
+
+    docker stop pytorch-notebook
+
+
+### Run model using vllm
 
 ### Restart the instance
 
