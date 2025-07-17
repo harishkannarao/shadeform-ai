@@ -114,6 +114,40 @@ Stop the docket container running jupyter notebook
 
 ### Run model using vllm
 
+Create SSH Tunnel with port forwarding
+
+    ssh -i scratch/shadeform_ai_private_key.pem -L 8000:localhost:8000 shadeform@{instance_ip}
+
+Start AI LLM Model using vllm through docker
+
+    docker run -d --rm --name vllm-openai --network=host --ipc=host --runtime nvidia --gpus all --env VLLM_API_KEY=SAMPLE_SECRET_FROM_VAULT vllm/vllm-openai:latest --model HuggingFaceH4/zephyr-7b-beta
+
+Follow the vllm logs in docker container
+
+    docker logs --follow vllm-openai
+
+Check the response from vllm
+
+```bash
+
+curl --request POST \
+--url 'http://localhost:8000/v1/chat/completions' \
+--header 'Content-Type: application/json' \
+--header "Authorization: Bearer SAMPLE_SECRET_FROM_VAULT" \
+--data '{
+  "model": "HuggingFaceH4/zephyr-7b-beta",
+  "messages": [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "Who won the world series in 2020?"}
+  ]
+}'
+
+```
+
+Stop the vllm docket container
+
+    docker stop vllm-openai
+
 ### Restart the instance
 
     curl -v --request POST --header "X-API-KEY: $SHADEFORM_AI_API_KEY" --url 'https://api.shadeform.ai/v1/instances/{instance_id}/restart' 
