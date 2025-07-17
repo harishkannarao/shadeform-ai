@@ -64,7 +64,7 @@ Change the permission of the private key as `chmod 600 scratch/shadeform_ai_priv
 
     sudo ufw deny 80/tcp
 
-    sudo ufw enable
+    sudo ufw --force enable
 
     sudo ufw status
 
