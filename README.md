@@ -33,9 +33,9 @@ Change the permission of the private key as `chmod 600 scratch/shadeform_ai_priv
         --header "X-API-KEY: $SHADEFORM_AI_API_KEY" \
         --header 'Content-Type: application/json' \
         --data '{
-                    "cloud": "hyperstack",
-                    "region": "oslo-norway-1",    
-                    "shade_instance_type": "A4000",
+                    "cloud": "imwt",
+                    "region": "kansascity-usa-2",    
+                    "shade_instance_type": "A6000",
                     "shade_cloud": true,
                     "name": "quickstart"
                 }'
@@ -51,6 +51,22 @@ Change the permission of the private key as `chmod 600 scratch/shadeform_ai_priv
 ##### SSH into the instance
 
     ssh -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}
+
+##### UFW firewall rules
+
+    sudo ufw status
+
+    sudo ufw default deny incoming
+
+    sudo ufw allow 22
+
+    sudo ufw allow OpenSSH
+
+    sudo ufw deny 80/tcp
+
+    sudo ufw enable
+
+    sudo ufw status
 
 ##### Check os, cpu, memory and gpu info
 
@@ -156,19 +172,3 @@ Stop the vllm docket container
 
     curl -v --request POST --header "X-API-KEY: $SHADEFORM_AI_API_KEY" --url 'https://api.shadeform.ai/v1/instances/{instance_id}/delete'
 
-### UFW firewall rules
-
-    sudo ufw status
-
-    sudo ufw default deny incoming
-
-    sudo ufw allow 22
-
-    sudo ufw allow OpenSSH
-
-    sudo ufw deny 80/tcp
-
-    sudo ufw enable
-
-    sudo ufw status
-    
