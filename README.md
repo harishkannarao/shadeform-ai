@@ -94,9 +94,13 @@ Create SSH Tunnel with port forwarding
 
     ssh -i scratch/shadeform_ai_private_key.pem -L 8888:localhost:8888 shadeform@{instance_ip}
 
-Start jupyter notebook using docker
+Start minimal jupyter notebook using docker
 
-    docker run -d --rm --name pytorch-notebook --network=host --ipc=host --runtime nvidia --gpus all quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8
+    docker run -d --rm --name pytorch-notebook --network=host --ipc=host --runtime nvidia --gpus all -v "${PWD}":/home/work quay.io/jupyter/minimal-notebook:python-3.12 start-notebook.py --ServerApp.root_dir=/home/work
+
+Start pytorch cuda jupyter notebook using docker
+
+    docker run -d --rm --name pytorch-notebook --network=host --ipc=host --runtime nvidia --gpus all -v "${PWD}":/home/work quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8 start-notebook.py --ServerApp.root_dir=/home/work
 
 Get the notebook token from docker logs
 
@@ -127,6 +131,13 @@ Stop the docket container running jupyter notebook
 
     docker stop pytorch-notebook
 
+Upload file from local to shadeform
+
+    scp -i scratch/shadeform_ai_private_key.pem local_sample_python.py shadeform@{instance_ip}:~
+    
+Download file from shadeform to local
+
+    scp -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:~/remote_sample_python.py .
 
 ### Run model using vllm
 
