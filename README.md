@@ -78,7 +78,7 @@ Change the permission of the private key as `chmod 600 scratch/shadeform_ai_priv
 
     grep MemTotal /proc/meminfo
 
-    sudo apt-get install gpustat
+    sudo apt-get install -y gpustat
 
     gpustat
 
@@ -94,17 +94,23 @@ Create SSH Tunnel with port forwarding
 
     ssh -i scratch/shadeform_ai_private_key.pem -L 8888:localhost:8888 shadeform@{instance_ip}
 
+Create a directory for jupyter
+
+    mkdir -p /home/shadeform/jupyter
+
+    chmod a+rwx /home/shadeform/jupyter
+
 Start minimal jupyter notebook using docker
 
-    docker run -d --rm --name pytorch-notebook --network=host --ipc=host --runtime nvidia --gpus all -v "${PWD}":/home/work quay.io/jupyter/minimal-notebook:python-3.12 start-notebook.py --ServerApp.root_dir=/home/work
+    docker run -d --rm --name pytorch-notebook --network=host --ipc=host --runtime nvidia --gpus all -v "/home/shadeform/jupyter:/home/work" quay.io/jupyter/minimal-notebook:python-3.12 start-notebook.py --ServerApp.root_dir=/home/work
 
 Start pytorch cuda jupyter notebook using docker
 
-    docker run -d --rm --name pytorch-notebook --network=host --ipc=host --runtime nvidia --gpus all -v "${PWD}":/home/work quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8 start-notebook.py --ServerApp.root_dir=/home/work
+    docker run -d --rm --name pytorch-notebook --network=host --ipc=host --runtime nvidia --gpus all -v "/home/shadeform/jupyter:/home/work" quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8 start-notebook.py --ServerApp.root_dir=/home/work
 
 Get the notebook token from docker logs
 
-    docker logs --follow pytorch-notebook | grep 'token'
+    docker logs --follow pytorch-notebook | grep 'http://127.0.0.1:8888/lab?token'
 
 Access the jupyter notebook in browser via localhost through the ssh tunnel. Use the `token` to login
 
@@ -133,11 +139,11 @@ Stop the docket container running jupyter notebook
 
 Upload file from local to shadeform
 
-    scp -i scratch/shadeform_ai_private_key.pem local_sample_python.py shadeform@{instance_ip}:~
+    scp -i scratch/shadeform_ai_private_key.pem local_sample_python.py shadeform@{instance_ip}:/home/shadeform/jupyter
     
 Download file from shadeform to local
 
-    scp -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:~/remote_sample_python.py .
+    scp -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:/home/shadeform/jupyter/remote_sample_python.py .
 
 ### Run model using vllm
 
