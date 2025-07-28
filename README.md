@@ -111,9 +111,9 @@ Start minimal jupyter notebook using docker
 
     docker run -d --rm --name pytorch-notebook --network=host --ipc=host --runtime nvidia --gpus all -v "/home/shadeform/jupyter/start-notebook.d:/usr/local/bin/start-notebook.d" -v "/home/shadeform/jupyter:/home/work" -w "/home/work" quay.io/jupyter/minimal-notebook:python-3.12
 
-Start pytorch cuda jupyter notebook using docker
+Start pytorch cuda conda jupyter notebook using docker
 
-    docker run -d --rm --name pytorch-notebook --network=host --ipc=host --runtime nvidia --gpus all -v "/home/shadeform/jupyter/start-notebook.d:/usr/local/bin/start-notebook.d" -v "/home/shadeform/jupyter:/home/work" -w "/home/work" quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8
+    docker run -d --rm --name pytorch-notebook --network=host --ipc=host --runtime nvidia --gpus all -v "/home/shadeform/jupyter/start-notebook.d:/usr/local/bin/start-notebook.d" -v "/home/shadeform/jupyter:/home/work" -w "/home/work" quay.io/jupyter/pytorch-notebook:cuda12-conda-25.5.1
 
 Get the notebook token from docker logs
 
