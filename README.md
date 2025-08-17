@@ -146,11 +146,15 @@ Stop the docker container running jupyter notebook
 
 Upload file from local to shadeform
 
-    scp -i scratch/shadeform_ai_private_key.pem local_sample_python.py shadeform@{instance_ip}:/home/shadeform/jupyter
+    scp -r -i scratch/shadeform_ai_private_key.pem local_sample_python.py shadeform@{instance_ip}:/home/shadeform/jupyter
     
 Download file from shadeform to local
 
-    scp -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:/home/shadeform/jupyter/remote_sample_python.py .
+    scp -r -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:/home/shadeform/jupyter/lora_model/ /Users/harishkannarao/Downloads/shadeform_download
+
+    scp -r -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:/home/shadeform/jupyter/model/ /Users/harishkannarao/Downloads/shadeform_download
+
+    scp -r -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:/home/shadeform/jupyter/gguf_model/ /Users/harishkannarao/Downloads/shadeform_download
 
 ### Run model using vllm
 
