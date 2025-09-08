@@ -33,8 +33,8 @@ Change the permission of the private key as `chmod 600 scratch/shadeform_ai_priv
         --header "X-API-KEY: $SHADEFORM_AI_API_KEY" \
         --header 'Content-Type: application/json' \
         --data '{
-                    "cloud": "imwt",
-                    "region": "kansascity-usa-2",    
+                    "cloud": "hyperstack",
+                    "region": "montreal-canada-2",    
                     "shade_instance_type": "A6000",
                     "shade_cloud": true,
                     "name": "quickstart"
