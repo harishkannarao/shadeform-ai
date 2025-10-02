@@ -164,7 +164,7 @@ Create SSH Tunnel with port forwarding
 
 Start AI LLM Model using vllm through docker
 
-    docker run -d --rm --name vllm-openai --network=host --ipc=host --runtime nvidia --gpus all --env VLLM_API_KEY=SAMPLE_SECRET_FROM_VAULT vllm/vllm-openai:latest --model HuggingFaceH4/zephyr-7b-beta
+    docker run -d --rm --name vllm-openai --network=host --ipc=host --runtime nvidia --gpus all --env VLLM_API_KEY=SAMPLE_SECRET_FROM_VAULT vllm/vllm-openai:latest --model openai/gpt-oss-20b
 
 Follow the vllm logs in docker container
 
@@ -179,7 +179,7 @@ curl --request POST \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer SAMPLE_SECRET_FROM_VAULT" \
 --data '{
-  "model": "HuggingFaceH4/zephyr-7b-beta",
+  "model": "openai/gpt-oss-20b",
   "messages": [
     {"role": "system", "content": "You are a helpful assistant."},
     {"role": "user", "content": "Who won the world series in 2020?"}
