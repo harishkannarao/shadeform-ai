@@ -33,8 +33,8 @@ Change the permission of the private key as `chmod 600 scratch/shadeform_ai_priv
         --header "X-API-KEY: $SHADEFORM_AI_API_KEY" \
         --header 'Content-Type: application/json' \
         --data '{
-                    "cloud": "hyperstack",
-                    "region": "montreal-canada-2",    
+                    "cloud": "imwt",
+                    "region": "desmoines-usa-2",    
                     "shade_instance_type": "A6000",
                     "shade_cloud": true,
                     "name": "quickstart"
@@ -188,9 +188,27 @@ curl --request POST \
 
 ```
 
-Stop the vllm docket container
+Stop the vllm docker container
 
     docker stop vllm-openai
+
+### Run model using ollama
+
+Create SSH Tunnel with port forwarding
+
+    ssh -i scratch/shadeform_ai_private_key.pem -L 11434:localhost:11434 shadeform@{instance_ip}
+
+Start Ollama through docker
+
+    docker run -d --rm --name ollama -v ollama:/root/.ollama --network=host --ipc=host --runtime nvidia --gpus all ollama/ollama
+
+Follow the vllm logs in docker container
+
+    docker logs --follow ollama
+
+Stop the vllm docket container
+
+    docker stop ollama
 
 ### Restart the instance
 
