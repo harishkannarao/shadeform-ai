@@ -206,6 +206,12 @@ Follow the vllm logs in docker container
 
     docker logs --follow ollama
 
+Go into the ollama container
+
+    docker exec -it ollama /bin/bash
+
+    ollama --version
+
 Stop the vllm docket container
 
     docker stop ollama
