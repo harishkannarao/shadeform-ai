@@ -156,7 +156,7 @@ Download file from shadeform to local
 
     scp -r -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:/home/shadeform/jupyter/gguf_model/ /Users/harishkannarao/Downloads/shadeform_download
 
-### Run model using vllm
+### Run model(s) using vllm
 
 Create SSH Tunnel with port forwarding
 
@@ -164,7 +164,7 @@ Create SSH Tunnel with port forwarding
 
 Start AI LLM Model using vllm through docker
 
-    docker run -d --rm --name vllm-openai --network=host --ipc=host --runtime nvidia --gpus all --env VLLM_API_KEY=SAMPLE_SECRET_FROM_VAULT vllm/vllm-openai:latest --model openai/gpt-oss-20b
+    docker run -d --rm --name vllm-openai -p 8000:8000 --runtime nvidia --gpus all --env VLLM_API_KEY=SAMPLE_SECRET_FROM_VAULT vllm/vllm-openai:latest --gpu-memory-utilization 0.7 --model openai/gpt-oss-20b
 
 Follow the vllm logs in docker container
 
@@ -191,6 +191,22 @@ curl --request POST \
 Stop the vllm docker container
 
     docker stop vllm-openai
+
+Create SSH Tunnel with port forwarding for embedding model
+
+    ssh -i scratch/shadeform_ai_private_key.pem -L 8001:localhost:8001 shadeform@{instance_ip}
+
+Start AI LLM Model using vllm through docker
+
+    docker run -d --rm --name vllm-openai-embedding -p 8001:8000 --runtime nvidia --gpus all --env VLLM_API_KEY=SAMPLE_SECRET_FROM_VAULT vllm/vllm-openai:latest --gpu-memory-utilization 0.3 --model mixedbread-ai/mxbai-embed-large-v1
+
+Follow the vllm logs in docker container
+
+    docker logs --follow vllm-openai-embedding
+
+Stop the vllm docker container
+
+    docker stop vllm-openai-embedding
 
 ### Run model using ollama
 
