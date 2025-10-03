@@ -147,6 +147,8 @@ Stop the docker container running jupyter notebook
 Upload file from local to shadeform
 
     scp -r -i scratch/shadeform_ai_private_key.pem local_sample_python.py shadeform@{instance_ip}:/home/shadeform/jupyter
+
+    scp -i scratch/shadeform_ai_private_key.pem /Users/harishkannarao/Professional/Learnings/unsloth-ai-fine-tuning/* shadeform@{instance_ip}:/home/shadeform/unsloth-ai-fine-tuning/
     
 Download file from shadeform to local
 
