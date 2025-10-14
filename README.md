@@ -92,7 +92,7 @@ Change the permission of the private key as `chmod 600 scratch/shadeform_ai_priv
 
 Create SSH Tunnel with port forwarding
 
-    ssh -o "StrictHostKeyChecking no" -i scratch/shadeform_ai_private_key.pem -L 8888:localhost:8888 shadeform@{instance_ip}
+    ssh -o "StrictHostKeyChecking no" -i scratch/shadeform_ai_private_key.pem -L 8888:localhost:8888 -L 8000:localhost:8000 shadeform@{instance_ip}
 
 Create a directory for jupyter
 
