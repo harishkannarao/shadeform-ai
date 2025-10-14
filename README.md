@@ -176,6 +176,15 @@ Check the response from vllm
 
 ```bash
 
+curl \
+--url 'http://localhost:8000/v1/models' \
+--header 'Accept: application/json' \
+--header "Authorization: Bearer SAMPLE_SECRET_FROM_VAULT"
+
+```
+
+```bash
+
 curl --request POST \
 --url 'http://localhost:8000/v1/chat/completions' \
 --header 'Content-Type: application/json' \
