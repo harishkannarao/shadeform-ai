@@ -50,7 +50,7 @@ Change the permission of the private key as `chmod 600 scratch/shadeform_ai_priv
 
 ##### SSH into the instance
 
-    ssh -o "StrictHostKeyChecking no" -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}
+    ssh -o "StrictHostKeyChecking no" -L 8888:localhost:8888 -L 8000:localhost:8000 -L 8001:localhost:8001 -L 11434:localhost:11434 -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}
 
 ##### UFW firewall rules
 
