@@ -152,11 +152,9 @@ Upload file from local to shadeform
     
 Download file from shadeform to local
 
-    scp -r -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:/home/shadeform/jupyter/lora_model/ $HOME/Downloads/shadeform_download
+    scp -r -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:/home/shadeform/unsloth-ai-fine-tuning/lora_model/ $HOME/Downloads/shadeform_download
 
-    scp -r -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:/home/shadeform/jupyter/model/ $HOME/Downloads/shadeform_download
-
-    scp -r -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:/home/shadeform/jupyter/gguf_model/ $HOME/Downloads/shadeform_download
+    scp -r -i scratch/shadeform_ai_private_key.pem shadeform@{instance_ip}:/home/shadeform/unsloth-ai-fine-tuning/model/ $HOME/Downloads/shadeform_download
 
 ### Run model(s) using vllm
 
