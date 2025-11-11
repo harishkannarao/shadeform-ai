@@ -237,7 +237,7 @@ Go into the ollama container
 
     ollama --version
 
-Stop the vllm docket container
+Stop the ollama container
 
     docker stop ollama
 
