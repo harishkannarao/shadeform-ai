@@ -237,6 +237,8 @@ Go into the ollama container
 
     ollama --version
 
+    ollama pull mistral-small:24b
+
 Stop the ollama container
 
     docker stop ollama
