@@ -237,7 +237,7 @@ Go into the ollama container
 
     ollama --version
 
-    ollama pull mistral-small:24b
+    ollama pull mistral-small:latest
 
 Stop the ollama container
 
